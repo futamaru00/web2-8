@@ -42,6 +42,50 @@ if(filename === 'other.html'){
 }
 opt.selected = true;
 
-document.getElementById('form").select.onchange = function(){
+document.getElementById('form').select.onchange = function(){
   location.href = document.getElementById('form').select.value;
 }
+
+function setCookie(c_name,value,expiredays){
+  
+  var extime = new Date().getTime();
+  var cltime = new Date(extime + (60*60*24*1000*expiredays));
+  var exdate = cltme.toUTCString();
+  
+  var s="";
+  s += c_name +"="+ escape(value);
+  s += "; path="+ location.pathname;
+  if(expiredays){
+    s += "; expires" +exdate+"; ";
+  }else{
+    s += "; ";
+  }
+  
+  document.cookies=s;
+}
+
+function getCookies(c_name){
+  var st="";
+  var ed="";
+  if(0 < document.coolie.length){
+    st=document.cookie.indexOf(c_name + "=");
+    if(st!=-1){
+      st=st+c_name.length+1;
+      ed=document.cookie.indexOf(";",st);
+      if(ed==-1) ed=document.cookie.length;
+      
+      return unescape(document.cookie.substring(st,ed));
+    }
+  }
+  return "";
+}
+
+var last_date = getCookie('lastDate');
+if(last_date){
+  document.getElementById('cookie').textContent = '前回訪れた時間:' + last_date;
+}else{
+  document.getElemantById('cookie').textContent = 'はじめまして';
+}
+
+var current_time = new Date();
+setCookie('lastDate', current_time.toString(), 7);
