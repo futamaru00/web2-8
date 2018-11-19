@@ -89,3 +89,10 @@ if(last_date){
 
 var current_time = new Date();
 setCookie('lastDate', current_time.toString(), 7);
+
+var thumbs = document.querySelectorAll('.thumb');
+for(udx in thumbs){
+  thumbs[idx].onclick = function(){
+    document.getElementById("bigimg").src = 'img/' + this.dataset.image + '.jpg';
+  }
+}
